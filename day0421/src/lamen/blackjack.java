@@ -115,6 +115,7 @@ public class blackjack {
 				pstm.setString(2, password1);
 				try(ResultSet rs = pstm.executeQuery()){
 					rs.next();
+					if(!rs.getString("id").equals(null)) {
 					System.out.println("로그인 성공했습니다.");
 					user.setId(rs.getString("id"));
 					user.setPassword(rs.getString("password"));
@@ -122,10 +123,12 @@ public class blackjack {
 					user.setMoney(rs.getInt("money"));
 					System.out.println("아이디 : "+user.getId()+"    보유 금액 : "+user.getMoney());
 					break;
+					}else {
+						break;
+					}
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}
